@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :contacts
   resources :users
   resource :session, only: [:new, :create, :destroy]
-  root 'users#index'
+  root 'contacts#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   get 'signout', to: 'sessions#destroy'

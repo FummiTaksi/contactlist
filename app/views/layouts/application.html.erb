@@ -1,16 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact manager</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
 <body>
 <div class="navibar">
-  <strong>Contact manager</strong>
-       <p><%=link_to "Home page",root_path %></p>
+       <%=link_to "Home page",root_path %>
   <% if current_user %>
-      <p><%=link_to current_user, current_user%> signed in </p>
-      <p><%=link_to "Sign out",signout_path %></p>
-      <p><%=link_to "Your contacts", contacts_path %></p>
-      <p><%=link_to "Create new contact",new_contact_path %></p>
+      <%=link_to current_user, current_user%> signed in
+      <%=link_to "Sign out",signout_path %>
+      <%=link_to "Your contacts", contacts_path %>
+      <%=link_to "Create new contact",new_contact_path %>
 
       <% else %>
-      <p><%=link_to "Sign up", signup_path %></p>
-      <p><%=link_to "Sign in", signin_path%></p>
+      <%=link_to "Sign up", signup_path %>
+      <%=link_to "Sign in", signin_path%>
   <% end %>
   <%= yield %>
 </div>

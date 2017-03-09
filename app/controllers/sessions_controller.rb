@@ -5,8 +5,16 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
-    session[:user_id] = user.id if not user.nil?
-    redirect_to user
+    if user
+      session[:user_id] = user.id if not user.nil?
+      redirect_to user_path(user), notice: "Welcome back!"
+    else
+      redirect_to :back, notice: "No username"
+    end
+  else
+
+
+
   end
 
   def destroy

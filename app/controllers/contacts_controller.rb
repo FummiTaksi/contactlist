@@ -24,10 +24,11 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+    @contact = Contact.create(contact_params)
 
     respond_to do |format|
       if @contact.save
+        current_user.contacts << @contact
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else

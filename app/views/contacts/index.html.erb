@@ -3,7 +3,7 @@
 <h1>Listing Contacts</h1>
 
 
-<% if current_user %>
+<% if current_user and not current_user.contacts.empty?%>
     <table>
       <thead>
       <tr>
@@ -14,23 +14,26 @@
       </tr>
       </thead>
       <tbody>
-      <% current_user.contacts.each do |contact| %>
+      <%current_user.contacts.each do |contact| %>
           <tr>
-            <td><%= contact.name %></td>
+            <td><%= link_to contact.name, contact %></td>
             <td><%= contact.number %></td>
             <td><%= contact.email %></td>
-            <td><%= link_to 'Show', contact %></td>
             <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
             <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
-    <%else %>
+    <%elsif current_user%>
+       You dont have any contacts!
+    <%= link_to 'New Contact', new_contact_path%>
+       <% else %>
       You need to be signed in to see contacts!
+      <%= link_to 'Create an account', signup_path %>
       <% end %>
 
 
 <br>
 
-<%= link_to 'New Contact', new_contact_path %>
+
