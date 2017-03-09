@@ -51,6 +51,24 @@ describe "Contacts pages" do
     expect(page).not_to have_content "aapo"
   end
 
+  it "deletes contact when signed in" do
+    create_pekka_with_one_contact
+    sign_in(username:"Pekka", password:"salasana")
+    visit contacts_path
+    click_link "Destroy"
+    expect(page).to have_content "You dont have any contacts!"
+  end
+
+  it "can edit contact" do
+    create_pekka_with_one_contact
+    sign_in(username:"Pekka", password:"salasana")
+    visit contacts_path
+    click_link "Edit"
+    fill_in('Name',with:'Uusi')
+    click_button "Update Contact"
+    expect(page).to have_content "Name: Uusi"
+  end
+
   def create_pekka_with_one_contact
     user = User.create username:"Pekka", password: "salasana", password_confirmation: "salasana"
     jake = Contact.create name:"jake", email:"jake@jake.fi", number:"1234"
