@@ -10,7 +10,10 @@
 <div class="navibar">
        <%=link_to "Home page",root_path %>
   <% if current_user %>
+      <br>
+
       <%=link_to current_user, current_user%> signed in
+      <br>
       <%=link_to "Sign out",signout_path %>
       <%=link_to "Your contacts", contacts_path %>
       <%=link_to "Create new contact",new_contact_path %>
